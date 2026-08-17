@@ -20,4 +20,4 @@
 Open your **Google Cloud Shell** terminal inside the lab session, copy and paste the following command, then press **Enter**:
 
 ```bash
-curl -sSL [https://raw.githubusercontent.com/CloudRik/Deploy-Your-Website/main/deploy-cloud-run.sh](https://raw.githubusercontent.com/CloudRik/Deploy-Your-Website/main/deploy-cloud-run.sh) | bash
+curl -sSL https://raw.githubusercontent.com/CloudRik/Deploy-Your-Website/main/deploy-cloud-run.sh | bash
