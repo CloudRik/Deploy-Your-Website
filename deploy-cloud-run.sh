@@ -14,7 +14,6 @@ echo "=================================================="
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
 LOCATION=$(gcloud config get-value compute/region 2>/dev/null)
 
-# Fallback values if empty
 if [ -z "$PROJECT_ID" ]; then
     PROJECT_ID=$DEVSHELL_PROJECT_ID
 fi
@@ -52,6 +51,9 @@ gcloud artifacts repositories create monolith-demo \
     --repository-format=docker \
     --location=$LOCATION \
     --description="Docker repository for monolith demo" || true
+
+# Wait a few seconds for repository creation to reflect
+sleep 5
 
 echo "[Task 2/6] Configuring Docker authentication..."
 gcloud auth configure-docker $LOCATION-docker.pkg.dev --quiet
