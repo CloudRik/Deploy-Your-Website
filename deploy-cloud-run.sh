@@ -10,14 +10,18 @@ echo "=================================================="
 echo " Starting Google Cloud Run Lab Automation Script "
 echo "=================================================="
 
-# 1. Dynamic Inputs & Environment Setup
-PROJECT_ID=$(gcloud config get-value project)
+# Auto-detect Project ID & Region
+PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
+LOCATION=$(gcloud config get-value compute/region 2>/dev/null)
+
+# Fallback values if empty
 if [ -z "$PROJECT_ID" ]; then
-    read -p "Enter your GCP Project ID: " PROJECT_ID
+    PROJECT_ID=$DEVSHELL_PROJECT_ID
 fi
 
-read -p "Enter GCP Region [default: europe-west1]: " INPUT_REGION
-LOCATION=${INPUT_REGION:-europe-west1}
+if [ -z "$LOCATION" ]; then
+    LOCATION="europe-west1"
+fi
 
 echo ""
 echo "Configuration Summary:"
